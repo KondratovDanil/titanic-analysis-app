@@ -23,7 +23,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - run: |
+    - name of: Lint with Flake8
+      run: |
         # остановка сборки при наличии ошибок Python (синтаксис), но игнорирование ошибок flake8
         # flake8 сообщит об ошибках, но не провалит сборку
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
