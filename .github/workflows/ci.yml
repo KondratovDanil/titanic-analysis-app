@@ -1,0 +1,35 @@
+name: Python CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - run: |
+        # остановка сборки при наличии ошибок Python (синтаксис), но игнорирование ошибок flake8
+        # flake8 сообщит об ошибках, но не провалит сборку
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # выход с ненулевым кодом только при наличии ошибок flake8
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Test with pytest
+      run: |
+        pytest
