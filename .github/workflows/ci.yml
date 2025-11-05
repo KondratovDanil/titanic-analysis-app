@@ -23,13 +23,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name of: Lint with Flake8
+    - name: Lint with flake8 # Новое название для ясности
       run: |
-        # остановка сборки при наличии ошибок Python (синтаксис), но игнорирование ошибок flake8
-        # flake8 сообщит об ошибках, но не провалит сборку
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # выход с ненулевым кодом только при наличии ошибок flake8
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        # Запускаем flake8 как модуль Python
+        python -m flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        python -m flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    
 
     - name: Test with pytest
       run: |
