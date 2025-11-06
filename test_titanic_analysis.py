@@ -2,6 +2,7 @@ import pytest
 import pandas as pd
 from titanic_analysis import analyze_survivors
 
+
 # Тестовые данные
 @pytest.fixture
 def sample_data():

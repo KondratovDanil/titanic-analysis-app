@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def analyze_survivors(df):
     """
     Подсчитывает количество выживших мужчин по каждому классу обслуживания,
